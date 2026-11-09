@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=70"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "student-app"
+version = "0.1.0"
+description = "Laboratory work 6: automated testing of a student registry"
+requires-python = ">=3.11"
+dependencies = [
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "pytest-cov>=5",
+    "pytest-asyncio>=0.23",
+]
+
+[project.scripts]
+student-app = "student_app.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = ["-ra", "--strict-markers"]
+asyncio_mode = "strict"
+asyncio_default_fixture_loop_scope = "function"
+markers = [
+    "integration: integration tests (several components together)",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["student_app"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+fail_under = 80

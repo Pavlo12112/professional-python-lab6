@@ -1,0 +1,6 @@
+processing:
+  minimum_grade: 60
+  skip_invalid: true
+
+output:
+  path: output/students.json
